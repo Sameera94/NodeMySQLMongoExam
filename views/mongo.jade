@@ -1,0 +1,62 @@
+doctype html
+html
+	head
+		link(rel='stylesheet', href='/css/style.css')
+		title= "Mongo"
+	body.mybody
+	block content
+		h1.mytitle Mongo Example
+		div
+			div.nav
+				table.navtable
+					tr
+						td 
+							a.navitem(href="#") Home
+						td 
+							a.navitem(href="#") About
+						td 
+							a.navitem(href="#") Contact Us
+			br
+			br
+			form(method="POST", action="/addBook")
+					label.mylabel Name 
+					input#name.mytext(type='text', placeholder='Student Name' name='name')
+					br
+					br
+					label.mylabel Age
+					input#description.mytext(type='text', placeholder='Age' name='age')
+					br
+					br
+					button.mybutton(type='submit') Add
+					br
+					br
+					table.mytable(border='1')
+							thead
+								tr
+									th ID
+									th Name
+									th Age	
+									th Actions
+							tbody
+								each item in items
+									tr
+										td=item.id
+										td=item.name
+										td=item.age 
+										td
+											button.btn.btn-danger(type='button',onClick='delete1("#{item.id}","#{item.name}")') Delete
+			
+	script.
+		function delete1(id,name){ 
+
+			console.log(id+"  "+name);
+
+			var val = confirm("Do you want to delete the record ?");
+			if(val == true){
+				window.location.href = '/removeStudent/'+id+'/'+name;
+				return true;
+			}
+			else{
+				return false;
+			}
+		};

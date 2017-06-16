@@ -1,0 +1,44 @@
+doctype html
+html
+	head
+		title= "MySQL"
+	body
+	block content
+		h1 MySQL
+		form(method="POST", action="/addMarks")
+			div
+				span.label Name &nbsp;
+				input#name.form-control(type='text', placeholder='Student Name' name='name')
+			div
+				span.label Age &nbsp;
+				input#description.form-control(type='text', placeholder='Age' name='age')
+			button.btn.btn-primary(type='submit') Add
+			br
+			br
+			table.table.table(border='1')
+					thead
+						tr
+							th ID
+							th Name
+							th Age	
+							th Actions
+					tbody
+						each item in items
+							tr
+								td=item.id
+								td=item.name
+								td=item.age 
+								td
+									button.btn.btn-danger(type='button',onClick='delete1("#{item.id}")') Delete
+			
+	script.
+		function delete1(id){ 
+			var val = confirm("Do you want to delete the record ?");
+			if(val == true){
+				window.location.href = '/deletestudent/'+id;
+				return true;
+			}
+			else{
+				return false;
+			}
+		};
